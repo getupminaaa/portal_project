@@ -1,7 +1,6 @@
 package com.example.kcalculator.controller;
 
 import com.example.kcalculator.UserService;
-import com.example.kcalculator.model.Response;
 import com.example.kcalculator.model.User;
 import com.example.kcalculator.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,13 +34,22 @@ public class UserController {
     @RequestMapping(value = "/delete_user")
     @ResponseBody
     ResponseEntity<?> delete(@RequestParam String token){
-        return new ResponseEntity<>(userService.delete(token),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(userService.deleteUser(token),HttpStatus.OK);
     }
 
     @GetMapping
     @RequestMapping(value = "/my_info")
     @ResponseBody
     public ResponseEntity<?> getMyInfo(@RequestParam String token){
-        return new ResponseEntity<>(userService.myInfo(token), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUserInfo(token), HttpStatus.OK);
     }
+
+@PostMapping
+    @RequestMapping(value = "/modify_user")
+    @ResponseBody
+    public ResponseEntity<?> modifyUserInfo(@ModelAttribute User user,@RequestParam String token){
+        return new ResponseEntity<>(userService.modifyUserInfo(user,token),HttpStatus.OK);
+}
+
+
 }

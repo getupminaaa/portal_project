@@ -20,53 +20,74 @@ public class UserService {
     }
 
     public Response insert(User user) {
-        user.setToken(UUID.randomUUID().toString());
-        userRepository.save(user);
         Response response = new Response();
-        response.setResultCode(0);
-        response.setBody("가입 성공");
+        Optional <User> existUser = userRepository.findByEmail(user.getEmail());
+        if(existUser.isEmpty()){
+            user.setToken(UUID.randomUUID().toString());
+            userRepository.save(user);
+            response.setResultCode(0);
+            response.setBody("가입 성공");
+        }else{
+            response.setResultCode(-1);
+            response.setDesc("이미 존재하는 사용자입니다.");
+        }
         return response;
     }
 
     public Response login(String email, String password) {
         Optional<User> user = userRepository.findByEmailAndPassword(email, password);
         Response response = new Response();
-        if (user.isPresent()) {
-            response.setResultCode(0);
-            response.setDesc("success");
-        } else {
+        if (user.isEmpty()) {
             response.setResultCode(-1);
             response.setDesc("fail");
+        } else {
+            response.setResultCode(0);
+            response.setDesc("success");
         }
         return response;
 
     }
 
-    public Response delete(String token) {
+    public Response deleteUser(String token) {
         Optional<User> user = userRepository.findByToken(token);
         Response response = new Response();
-        if (user.isPresent()) {
+        if (user.isEmpty()) {
+            response.setResultCode(-1);
+            response.setDesc("이미 삭제된 사용자입니다. ");
+        }else{
             userRepository.delete(user.get());
             response.setResultCode(0);
             response.setDesc("삭제 성공");
-        }else{
-            response.setResultCode(-1);
-            response.setDesc("이미 삭제된 사용자입니다. ");
         }
         return response;
     }
 
-    public Response myInfo(String token) {
+    public Response getUserInfo(String token) {
         Optional<User> user = userRepository.findByToken(token);
         Response response = new Response();
-        if (user.isPresent()) {
+        if (user.isEmpty()) {
+            response.setResultCode(-1);
+            response.setDesc("fail");
+        } else {
             response.setResultCode(0);
             response.setDesc("success");
             response.setBody(user.get());
-        } else {
-            response.setResultCode(-1);
-            response.setDesc("fail");
         }
         return response;
+    }
+    public Response modifyUserInfo(User user,String token){
+        Optional<User> beforeUser = userRepository.findByToken(token);
+        Response response = new Response();
+        if(beforeUser.isEmpty()){
+            response.setResultCode(-1);
+            response.setDesc("없는 사용자입니다");
+        }
+        else {
+            user.setId(beforeUser.get().getId());
+            userRepository.save(user);
+            response.setResultCode(0);
+            response.setDesc("성공");
+        }
+        return  response;
     }
 }
