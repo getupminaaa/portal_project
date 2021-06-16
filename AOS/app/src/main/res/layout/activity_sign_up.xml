@@ -30,7 +30,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/sign_up_height_cl"
-                android:layout_width=""
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/sign_up_weigjt_cl"
@@ -43,7 +43,7 @@
                     android:id="@+id/sign_up_height_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 키 "
+                    android:text=" 키"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
