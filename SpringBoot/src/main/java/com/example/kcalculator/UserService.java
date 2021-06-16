@@ -29,9 +29,9 @@ public class UserService {
     }
 
     public Response login(String email, String password) {
-        User user = userRepository.findByEmailAndPassword(email, password).get();
+        Optional< User> user = userRepository.findByEmailAndPassword(email, password);
         Response response = new Response();
-        if (user != null) {
+        if (user.isPresent()) {
             response.setResultCode(0);
             response.setDesc("success");
         } else {
