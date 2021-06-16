@@ -1,18 +1,16 @@
 package com.example.kcalculator.controller;
 
-import com.example.kcalculator.UserService;
+import com.example.kcalculator.service.UserService;
 import com.example.kcalculator.model.User;
-import com.example.kcalculator.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserRepository userRepository;
 
     private final UserService userService;
 
@@ -31,24 +29,24 @@ public class UserController {
     }
 
     @DeleteMapping
-    @RequestMapping(value = "/delete_user")
+    @RequestMapping(value = "/delete")
     @ResponseBody
     ResponseEntity<?> delete(@RequestParam String token) {
         return new ResponseEntity<>(userService.deleteUser(token), HttpStatus.OK);
     }
 
     @GetMapping
-    @RequestMapping(value = "/get_user")
+    @RequestMapping(value = "/get_userinfo")
     @ResponseBody
-    public ResponseEntity<?> getMyInfo(@RequestParam String token) {
+    public ResponseEntity<?> getUserInfo(@RequestParam String token) {
         return new ResponseEntity<>(userService.getUserInfo(token), HttpStatus.OK);
     }
 
     @PostMapping
-    @RequestMapping(value = "/modify_user")
+    @RequestMapping(value = "/update_userinfo")
     @ResponseBody
     public ResponseEntity<?> modifyUserInfo(@ModelAttribute User user, @RequestParam String token) {
-        return new ResponseEntity<>(userService.modifyUserInfo(user, token), HttpStatus.OK);
+        return new ResponseEntity<>(userService.updateUserInfo(user, token), HttpStatus.OK);
     }
 
 
