@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @DeleteMapping
-    @RequestMapping(value = "/user_delete")
+    @RequestMapping(value = "/delete_user")
     @ResponseBody
     ResponseEntity<?> delete(@RequestParam String token){
         return new ResponseEntity<>(userService.delete(token),HttpStatus.BAD_REQUEST);
