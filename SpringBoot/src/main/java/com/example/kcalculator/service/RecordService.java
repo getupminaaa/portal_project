@@ -7,7 +7,11 @@ import com.example.kcalculator.repository.RecordRepository;
 import com.example.kcalculator.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -21,14 +25,16 @@ public class RecordService {
         this.userRepository = userRepository;
     }
 
-    public Response insert(Record record) {
+    public Response insert(Record record, User user ,Date date) {
         Response response = new Response();
-        Optional<User> user = userRepository.findByEmail(record.getEmail());
-        if (user.isEmpty()) {
+        String userEmail = user.getEmail();
+        Optional<User> findUser = userRepository.findByEmail(userEmail);
+        if (findUser.isEmpty()) {
             response.setResultCode(-1);
-            response.setBody("앖는 사용자입니다.");
+            response.setDesc("존재하지않는 사용자입니다.");
         } else {
-            record.setDate(LocalDateTime.now());
+            record.setDate(date);
+            record.setUser(findUser.get());
             recordRepository.save(record);
             response.setResultCode(0);
             response.setDesc("insert 성공");
@@ -36,48 +42,70 @@ public class RecordService {
         return response;
     }
 
-    public Response getRecord(Integer id) {
+    public Response getRecords(User user, Date date) {
         Response response = new Response();
-        Optional<Record> record = recordRepository.findById(id);
-        if (record.isEmpty()) {
+        String userEmail = user.getEmail();
+        Optional<User> findUser = userRepository.findByEmail(userEmail);
+        if (findUser.isEmpty()) {
             response.setResultCode(-1);
-            response.setDesc("존재하지않는 글입니다.");
+            response.setDesc("존재하지않는 사용자입니다.");
         } else {
-            response.setResultCode(0);
-            response.setDesc("성공");
-            response.setBody(record.get());
+            List<Record> record = recordRepository.findAllByUserAndDate(findUser.get(), date);
+            if (record.isEmpty()) {
+                response.setResultCode(-1);
+                response.setDesc("존재하지않는 글입니다.");
+            } else {
+                response.setResultCode(0);
+                response.setDesc("성공");
+                response.setBody(record);
+            }
         }
         return response;
     }
 
-    public Response delete(Integer id) {
-        Optional<Record> record = recordRepository.findById(id);
+
+    public Response delete( User user, Date date, Integer category) {
         Response response = new Response();
-        if (record.isEmpty()) {
+        String userEmail = user.getEmail();
+        Optional<User> findUser = userRepository.findByEmail(userEmail);
+        if (findUser.isEmpty()) {
             response.setResultCode(-1);
-            response.setDesc("이미 삭제된 글입니다.");
+            response.setDesc("존재하지않는 사용자입니다.");
         } else {
-            recordRepository.delete(record.get());
-            response.setResultCode(0);
-            response.setDesc("삭제 성공");
+            Optional<Record> beforeRecord = recordRepository.findByUserAndDateAndCategory(findUser.get(), date, category);
+            if (beforeRecord.isEmpty()) {
+                response.setResultCode(-1);
+                response.setDesc("존재하지않는 글입니다.");
+            } else {
+                recordRepository.delete(beforeRecord.get());
+                response.setResultCode(0);
+                response.setDesc("성공");
+            }
         }
         return response;
     }
 
-    public Response updateRecord(Record record, Integer id) {
-        Optional<Record> beforeRecord = recordRepository.findById(id);
+    public Response updateRecord(Record record, User user, Date date, Integer category) {
         Response response = new Response();
-        if (beforeRecord.isEmpty()) {
+        String userEmail = user.getEmail();
+        Optional<User> findUser = userRepository.findByEmail(userEmail);
+        if (findUser.isEmpty()) {
             response.setResultCode(-1);
-            response.setDesc("존재하지않는 글입니다.");
-        }else{
-            record.setId(beforeRecord.get().getId());
-            record.setDate(LocalDateTime.now());
-            recordRepository.save(record);
-            response.setResultCode(0);
-            response.setDesc("성공");
+            response.setDesc("존재하지않는 사용자입니다.");
+        } else {
+            Optional<Record> beforeRecord = recordRepository.findByUserAndDateAndCategory(findUser.get(), date, category);
+            if (beforeRecord.isEmpty()) {
+                response.setResultCode(-1);
+                response.setDesc("존재하지않는 글입니다.");
+            } else {
+                record.setId(beforeRecord.get().getId());
+                record.setUser(findUser.get());
+                record.setDate(beforeRecord.get().getDate());
+                recordRepository.save(record);
+                response.setResultCode(0);
+                response.setDesc("성공");
+            }
         }
-
         return response;
     }
 }

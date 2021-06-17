@@ -1,4 +1,5 @@
 package com.example.kcalculator.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,33 +7,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.xml.stream.events.StartDocument;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity(name = "user")
-public class User implements Serializable {
+@Entity(name = "food")
+public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Integer id;
 
-    @JsonIgnore
-    @Column(unique = true)
-    private String email;
-
-    @JsonIgnore
-    private String password;
-
     private String name;
-    private Integer age;
-    private Integer gender;
-    private Float height;
-    private Float weight;
+    private Float intake;
+    private String file_name;
+    private String file_path;
 
-    @JsonIgnore
-    @Column(unique = true)
-    private String token;
+    @ManyToOne(targetEntity = Record.class)
+    @JoinColumn(name = "record_id")
+    public Record record;
 }

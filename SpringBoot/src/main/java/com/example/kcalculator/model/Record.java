@@ -1,33 +1,39 @@
 package com.example.kcalculator.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "record")
+@Table(name = "record", uniqueConstraints = @UniqueConstraint(columnNames = { "date", "category" }))
 public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     public Integer id;
-    private LocalDateTime date;
 
+    private Date date;
     private Integer category;
-    private String email;
+
+
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn (name="user_email", referencedColumnName = "email")
+    @JsonIgnore
+    private User user;
+
     private String context;
     private Float total_kcal;
     private Float total_carbohydrate;
