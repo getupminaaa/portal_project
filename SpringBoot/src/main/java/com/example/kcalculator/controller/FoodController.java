@@ -33,5 +33,18 @@ public class FoodController {
         return new ResponseEntity<>(foodService.getFoodRecord(record),HttpStatus.OK);
     }
 
+    @PostMapping
+    @RequestMapping(value = "/update_record")
+    @ResponseBody
+    ResponseEntity<?> update(@ModelAttribute Food food ,@ModelAttribute Record record, @RequestParam String name){
+        return new ResponseEntity<>(foodService.updateFoodRecord(food, record, name),HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    @RequestMapping(value = "/delete_record")
+    @ResponseBody
+    ResponseEntity<?> delete(@ModelAttribute Food food, @ModelAttribute Record record, @RequestParam String name){
+        return new ResponseEntity<>(foodService.deleteFoodRecord(food,record,name),HttpStatus.OK);
+    }
 
 }
