@@ -26,6 +26,6 @@ public class Food {
     private String file_path;
 
     @ManyToOne(targetEntity = Record.class)
-    @JoinColumn(name = "record_id")
+    @JoinColumn(name = "record_id", referencedColumnName = "id")
     public Record record;
 }
