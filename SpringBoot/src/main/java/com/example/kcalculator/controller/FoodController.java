@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 
-@Controller
+@RestController
 @RequestMapping("/food_record")
 @RequiredArgsConstructor
 public class FoodController {
