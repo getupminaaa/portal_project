@@ -29,8 +29,8 @@ public class FoodController {
     @GetMapping
     @RequestMapping(value = "/get_record")
     @ResponseBody
-    ResponseEntity<?> get(@RequestParam Integer record_id,@RequestParam Integer id){
-        return new ResponseEntity<>(foodService.getFoodRecord(),HttpStatus.OK);
+    ResponseEntity<?> get(@ModelAttribute Record record){
+        return new ResponseEntity<>(foodService.getFoodRecord(record),HttpStatus.OK);
     }
 
 
