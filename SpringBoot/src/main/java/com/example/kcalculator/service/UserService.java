@@ -84,6 +84,8 @@ public class UserService {
         else {
             user.setId(beforeUser.get().getId());
             user.setEmail(beforeUser.get().getEmail());
+            user.setPassword(beforeUser.get().getPassword());
+            user.setToken(beforeUser.get().getToken());
             userRepository.save(user);
             response.setResultCode(0);
             response.setDesc("성공");
