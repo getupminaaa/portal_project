@@ -16,25 +16,29 @@ public class UserController {
 
     @PostMapping
     @RequestMapping(value = "/user/signup")
-    ResponseEntity<?> insert(@RequestBody User user) {
+    @ResponseBody
+    ResponseEntity<?> insert(@ModelAttribute User user) {
         return new ResponseEntity<>(userService.insert(user), HttpStatus.OK);
     }
 
     @PostMapping
     @RequestMapping(value = "/user/login")
-    ResponseEntity<?> login(@RequestBody String email, @RequestParam String password) {
+    @ResponseBody
+    ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
 
         return new ResponseEntity<>(userService.login(email, password), HttpStatus.OK);
     }
 
     @DeleteMapping
     @RequestMapping(value = "/user/delete")
+    @ResponseBody
     ResponseEntity<?> delete(@RequestParam String token) {
         return new ResponseEntity<>(userService.deleteUser(token), HttpStatus.OK);
     }
 
     @GetMapping
     @RequestMapping(value = "/user/getInfo")
+    @ResponseBody
     public ResponseEntity<?> getUserInfo(@RequestParam String token) {
         return new ResponseEntity<>(userService.getUserInfo(token), HttpStatus.OK);
     }

@@ -45,7 +45,6 @@ public class UserService {
             response.setDesc("success");
         }
         return response;
-
     }
 
     public Response deleteUser(String token) {
@@ -83,6 +82,8 @@ public class UserService {
             response.setDesc("없는 사용자입니다");
         }
         else {
+            user.setId(beforeUser.get().getId());
+            user.setEmail(beforeUser.get().getEmail());
             userRepository.save(user);
             response.setResultCode(0);
             response.setDesc("성공");
