@@ -18,6 +18,7 @@ public class UserController {
     @RequestMapping(value = "/user/signup")
     @ResponseBody
     ResponseEntity<?> insert(@ModelAttribute User user) {
+
         return new ResponseEntity<>(userService.insert(user), HttpStatus.OK);
     }
 
@@ -25,6 +26,7 @@ public class UserController {
     @RequestMapping(value = "/user/login")
     @ResponseBody
     ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
+
 
         return new ResponseEntity<>(userService.login(email, password), HttpStatus.OK);
     }

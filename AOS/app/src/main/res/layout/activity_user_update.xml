@@ -113,31 +113,30 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/sign_up_email_tv"
+                android:id="@+id/update_email_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이메일"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/sign_up_email_et"
+                app:layout_constraintEnd_toStartOf="@+id/update_email_et"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/sign_up_email_et"
+            <TextView
+                android:id="@+id/update_email_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="이메일"
-                android:inputType="textPersonName"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/sign_up_email_tv"
+                app:layout_constraintStart_toEndOf="@+id/update_email_tv"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -151,7 +150,7 @@
             app:layout_constraintTop_toBottomOf="@id/update_email_cl">
 
             <TextView
-                android:id="@+id/sign_up_pwd_tv"
+                android:id="@+id/update_pwd_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="비밀번호"
@@ -175,7 +174,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/sign_up_pwd_tv"
+                app:layout_constraintStart_toEndOf="@+id/update_pwd_tv"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -361,7 +360,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:id="@+id/update_gender_et"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

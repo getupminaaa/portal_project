@@ -1,9 +1,10 @@
-package com.example.kcalculator.network.data.response
+package com.example.kcalculator.network.data
 
 import com.example.kcalculator.network.ServerResult
+import java.util.*
 
 open class BaseResponse(
-    var resultCode: Int = -1,
+    var resultCode: Int = -2,
     var desc: String? = null,
     var body: Any? = null
 ) : ServerResult {
