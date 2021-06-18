@@ -3,6 +3,7 @@ package com.example.kcalculator.service;
 import com.example.kcalculator.model.Response;
 import com.example.kcalculator.model.User;
 import com.example.kcalculator.repository.UserRepository;
+import org.hibernate.annotations.Cascade;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -42,6 +43,7 @@ public class UserService {
             response.setDesc("fail");
         } else {
             response.setResultCode(0);
+            response.setBody(user.get().getToken());
             response.setDesc("success");
         }
         return response;

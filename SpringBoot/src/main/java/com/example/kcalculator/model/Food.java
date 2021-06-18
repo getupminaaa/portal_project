@@ -25,7 +25,7 @@ public class Food {
     private String file_name;
     private String file_path;
 
-    @ManyToOne(targetEntity = Record.class)
+    @ManyToOne(targetEntity = Record.class, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "record_id", referencedColumnName = "id")
     public Record record;
 }

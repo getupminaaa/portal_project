@@ -2,6 +2,7 @@ package com.example.kcalculator.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kcalculator.R
 import com.example.kcalculator.UserDAO
@@ -13,6 +14,10 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private var userDAO = UserDAO
+
+    companion object {
+        var token:String =""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
             input_user_email = login_email_et.text.toString()
             input_user_pwd = login_pwd_et.text.toString()
             userDAO.login(
-                email = input_user_email,password= input_user_pwd,
+                email = input_user_email, password = input_user_pwd,
                 callback = object : Callback<BaseResponse> {
                     override fun onResponse(
                         call: Call<BaseResponse>,
@@ -36,12 +41,15 @@ class LoginActivity : AppCompatActivity() {
                     ) {
                         if (response.isSuccessful) {
                             var result = response.body()!!
-                            println(result.toString())
-                            if(result.resultCode==0){
+                            if (result.resultCode == 0) {
+                                token = result.body.toString()
+                                Log.d("TAG", "onResponse: $token")
                                 startActivity()
+
                             }
                         }
                     }
+
                     override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
                     }
                 })

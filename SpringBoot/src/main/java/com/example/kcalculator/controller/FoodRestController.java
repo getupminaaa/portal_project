@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/rest_food")
+@RequestMapping("/restfood")
 @RequiredArgsConstructor
 public class FoodRestController {
 
     private final FoodRestService foodRestService;
 
-    @GetMapping("/request_foodInfo")
+    @GetMapping("/request/foodInfo")
     @ResponseBody
     public ResponseEntity<?>getRestFood(@RequestParam String desc_kor){
         return new ResponseEntity<>(foodRestService.getRestFood(desc_kor), HttpStatus.OK);

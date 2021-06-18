@@ -1,6 +1,7 @@
 package com.example.kcalculator.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,7 +30,7 @@ public class Record {
     private Integer category;
 
 
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(targetEntity = User.class,cascade = CascadeType.REMOVE)
     @JoinColumn (name="user_email", referencedColumnName = "email")
     @JsonIgnore
     private User user;

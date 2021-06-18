@@ -12,4 +12,10 @@ object UserDAO {
     fun signup(email:String,password:String,name:String,age:Int,gender:Int,height:Float,weignt:Float,callback: Callback<BaseResponse>) {
         ApiServer.network.signup(email,password,name,age,gender,height,weignt).enqueue(callback)
     }
+    fun getInfo(token:String,callback: Callback<BaseResponse>){
+        ApiServer.network.getUserInfo(token).enqueue(callback)
+    }
+    fun deleteInfo(token: String,callback: Callback<BaseResponse>){
+        ApiServer.network.deleteUser(token).enqueue(callback)
+    }
 }
