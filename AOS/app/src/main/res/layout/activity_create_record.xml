@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/create_rc_date_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/create_rc_context_et"
+        app:layout_constraintEnd_toEndOf="@+id/create_rc_context_et"
+        app:layout_constraintStart_toStartOf="@+id/create_rc_context_et"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/create_rc_context_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/create_rc_totalkcal_et"
+        app:layout_constraintEnd_toEndOf="@+id/create_rc_totalkcal_et"
+        app:layout_constraintStart_toStartOf="@+id/create_rc_totalkcal_et"
+        app:layout_constraintTop_toBottomOf="@+id/create_rc_date_et" />
+
+    <EditText
+        android:id="@+id/create_rc_totalkcal_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/create_rc_totalcar_et"
+        app:layout_constraintEnd_toEndOf="@+id/create_rc_totalcar_et"
+        app:layout_constraintStart_toStartOf="@+id/create_rc_totalcar_et"
+        app:layout_constraintTop_toBottomOf="@+id/create_rc_context_et" />
+
+    <EditText
+        android:id="@+id/create_rc_totalcar_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/create_rc_totalpro_et"
+        app:layout_constraintEnd_toEndOf="@+id/create_rc_totalpro_et"
+        app:layout_constraintStart_toStartOf="@+id/create_rc_totalpro_et"
+        app:layout_constraintTop_toBottomOf="@+id/create_rc_totalkcal_et" />
+
+    <EditText
+        android:id="@+id/create_rc_totalpro_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/create_rc_totalfat"
+        app:layout_constraintEnd_toEndOf="@+id/create_rc_totalfat"
+        app:layout_constraintStart_toStartOf="@+id/create_rc_totalfat"
+        app:layout_constraintTop_toBottomOf="@+id/create_rc_totalcar_et" />
+
+    <EditText
+        android:id="@+id/create_rc_totalfat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/create_rc_totalsug"
+        app:layout_constraintEnd_toEndOf="@+id/create_rc_totalsug"
+        app:layout_constraintStart_toStartOf="@+id/create_rc_totalsug"
+        app:layout_constraintTop_toBottomOf="@+id/create_rc_totalpro_et" />
+
+    <EditText
+        android:id="@+id/create_rc_totalsug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName3"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName3"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName3"
+        app:layout_constraintTop_toBottomOf="@+id/create_rc_totalfat" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/create_rc_totalsug" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
